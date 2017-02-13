@@ -1,0 +1,10 @@
+language: python
+env:
+  - DJANGO_VERSION=1.10.5
+python:
+  - "3.5"
+install:
+  - pip3 install -q Django==$DJANGO_VERSION
+  - pip3 install --user -r requirements.txt
+  - python3 manage.py migrate
+  - python3 manage.py test
