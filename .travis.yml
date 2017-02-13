@@ -6,6 +6,9 @@ python:
 install:
   - pip3 install -q Django==$DJANGO_VERSION
   - pip3 install -r requirements.txt
-  - python3 manage.py makemigrations
+  - python3 manage.py makemigrations events
+  - python3 manage.py makemigrations orgs
+  - python3 manage.py makemigrations sharing_groups
+  - python3 manage.py makemigrations sync
   - python3 manage.py migrate
 script: python3 manage.py test

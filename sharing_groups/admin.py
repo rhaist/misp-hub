@@ -1,3 +1,4 @@
 from django.contrib import admin
+from sharing_groups import SharingGroup
 
-# Register your models here.
+admin.site.register(SharingGroup)
