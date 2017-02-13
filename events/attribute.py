@@ -20,33 +20,29 @@ class AttributeGroup(models.Model):
 
 
 class Attribute(models.Model):
-    ORGANISATION = 'ORG'
-    COMMUNITY = 'COM'
-    CONNECTED_COMMUNITIES = 'CON'
-    ALL_COMMUNITIES = 'ACO'
-    SHARING_GROUP = 'SHG'
-
     DISTRIBUTION_CHOICES = (
-        (ORGANISATION, "Your organisation only"),
-        (COMMUNITY, "This community only"),
-        (CONNECTED_COMMUNITIES, "Connected communities"),
-        (ALL_COMMUNITIES, "All communities"),
-        (SHARING_GROUP, "Sharing group"),
+        (0, "Your organisation only"),
+        (1, "This community only"),
+        (2, "Connected communities"),
+        (3, "All communities"),
+        (4, "Sharing group"),
+        (5, "Inherit Event"),
     )
 
-    category = models.ForeignKey(CategoryType, blank=False)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     # Is 'type' in the original model. But this is a keyword in most languages
     # and should not be named this way.
     attr_type = models.ForeignKey(AttributeType, blank=False)
-    value1 = models.TextField(blank=False)
-    value2 = models.TextField(blank=False)
+    category = models.ForeignKey(CategoryType, blank=False)
     to_ids = models.BooleanField(default=False)
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    distribution = models.IntegerField(default=0, choices=DISTRIBUTION_CHOICES)
     # The original model only has 'timestamp' we clearify here
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    distribution = models.CharField(default=ORGANISATION, choices=DISTRIBUTION_CHOICES, max_length=3)
-    sharing_group_id = models.ForeignKey(SharingGroup)
     # Is 'comment' in the original model. But this is a keyword in most sql dialects
-    attr_comment = models.TextField()
+    attr_comment = models.TextField(blank=True)
+    sharing_group_id = models.ForeignKey(SharingGroup, default=0)
+    # 'value1' and 'value2' in the original model
+    value_prefix = models.TextField(blank=False)
+    value_suffix = models.TextField(blank=False)
     deleted = models.BooleanField(default=False)

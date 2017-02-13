@@ -8,16 +8,17 @@ syncing with different MISP instances and sharing groups based on python3 and
 the Django framework to be easily extensible in the future with Django apps.
 
 
-# Development Roadmap
+## Development Roadmap
 
-- [ ] implement the current MISP 2.x data model complete using Django apps
+- [ ] implement the current MISP 2.x data model [1] complete using Django apps
 - [ ] implement the MISP permission model
 - [ ] implement a clean json API fo the data model
 - [ ] implement the MISP syncing protocols to be compatible with MISP 2.x servers
 - [ ] implement a proper test suite with a as complete as possible code coverage
 
+[1] https://raw.githubusercontent.com/MISP/misp-rfc/master/misp-core-format/raw.md.txt
 
-# Development Ideas up for discussion
+## Development Ideas up for discussion
 
 * Usage of Django Q for background tasks to be somewhat independent of task
 brokers (https://django-q.readthedocs.io)
@@ -26,7 +27,7 @@ underlying Django permission model (http://www.django-rest-framework.org/)
 * Usage of django-guardian (integrated with django-restframework) to port the
 permission model (https://django-guardian.readthedocs.io/en/stable/)
 
-# License
+## License
 
 This software is licensed under [BSD-3 clause](https://opensource.org/licenses/BSD-3-Clause)
 
