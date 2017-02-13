@@ -8,25 +8,18 @@ from sharing_groups.models import SharingGroup
 
 # REF: https://raw.githubusercontent.com/MISP/misp-rfc/master/misp-core-format/raw.md.txt
 class Event(models.Model):
-    # Some constants to efficiently store choicefields in databases
-    INITIAL = 'INI'
-    ONGOING = 'ONG'
-    COMPLETED = 'COM'
 
-    LOW = 'LOW'
-    MEDIUM = 'MED'
-    HIGH = 'HIG'
-
-    ANALYSIS_LEVEL_CHOICES = (
-        (INITIAL, 'Initial'),
-        (ONGOING, 'Ongoing'),
-        (COMPLETED, 'Completed'),
+    THREAT_LEVEL_CHOICES = (
+        (0, 'Undefined'),
+        (1, 'Low'),
+        (2, 'Medium'),
+        (3, 'High'),
     )
 
-    RISK_LEVEL_CHOICES = (
-        (LOW, 'Low'),
-        (MEDIUM, 'Medium'),
-        (HIGH, 'High'),
+    ANALYSIS_LEVEL_CHOICES = (
+        (0, 'Initial'),
+        (1, 'Ongoing'),
+        (2, 'Completed'),
     )
 
     DISTRIBUTION_CHOICES = (
@@ -40,8 +33,8 @@ class Event(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     published = models.BooleanField(default=False)
     info = models.CharField(blank=False, max_length=256)
-    threat_level_id = models.CharField(default=LOW, choices=RISK_LEVEL_CHOICES, max_length=3, blank=True)
-    analysis_level = models.CharField(default=INITIAL, choices=ANALYSIS_LEVEL_CHOICES, max_length=3, blank=True)
+    threat_level_id = models.IntegerField(default=0, choices=THREAT_LEVEL_CHOICES, blank=True)
+    analysis_level = models.IntegerField(default=0, choices=ANALYSIS_LEVEL_CHOICES, blank=True)
     # The RFC has 'date' and 'timestamp' we clearify the two here
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -49,7 +42,7 @@ class Event(models.Model):
     publish_date = models.DateTimeField(blank=True)
     org_id = models.ForeignKey(Organisation, blank=False)
     orgc_id = models.ForeignKey(Organisation, related_name="owner_org", blank=False)
-    distribution = models.IntegerField(default=0, choices=DISTRIBUTION_CHOICES)
+    distribution = models.IntegerField(default=0, choices=DISTRIBUTION_CHOICES, blank=False)
     sharing_group_id = models.ForeignKey(SharingGroup, default=0)
     # The original model has 'attribute_count' which we will provide with a
     # model property and reference all included attributes with a relation here.
