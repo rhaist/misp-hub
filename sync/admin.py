@@ -1,4 +1,4 @@
 from django.contrib import admin
-from sync.models import Servers
+from sync.models import SyncServer
 
-admin.site.register(Servers)
+admin.site.register(SyncServer)

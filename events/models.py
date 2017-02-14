@@ -32,7 +32,7 @@ class Event(models.Model):
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     published = models.BooleanField(default=False)
-    info = models.CharField(blank=False, max_length=256)
+    info = models.CharField(blank=False, max_length=255)
     threat_level_id = models.IntegerField(default=0, choices=THREAT_LEVEL_CHOICES, blank=True)
     analysis_level = models.IntegerField(default=0, choices=ANALYSIS_LEVEL_CHOICES, blank=True)
     # The RFC has 'date' and 'timestamp' we clearify the two here
@@ -61,7 +61,7 @@ class Sighting(models.Model):
 
 
 class EventTag(models.Model):
-    name = models.CharField(max_length=1024)
+    name = models.CharField(max_length=255)
     colour = models.CharField(max_length=7) # TODO: django-colorfield?
     exportable = models.BooleanField(default=True)
     hidden = models.BooleanField(default=True)
