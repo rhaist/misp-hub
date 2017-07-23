@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'sharing_groups',
     'sync',
     'rest_framework',
+    'django_q',
 ]
 
 MIDDLEWARE = [
@@ -123,4 +124,15 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':
     ['rest_framework.permissions.IsAuthenticated']
+}
+
+# ORM broker connection for django_q
+Q_CLUSTER = {
+    'name': 'DjangORM',
+    'workers': 4,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default'
 }
