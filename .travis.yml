@@ -1,10 +1,10 @@
 language: python
-env:
-  - DJANGO_VERSION=1.10.5
 python:
+  - "3.4"
   - "3.5"
+  - "3.6"
+  - "nightly"
 install:
-  - pip3 install -q Django==$DJANGO_VERSION
   - pip3 install -r requirements.txt
   - python3 manage.py makemigrations events
   - python3 manage.py makemigrations orgs
