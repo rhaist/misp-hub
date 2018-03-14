@@ -1,4 +1,4 @@
-# MISP Hub [![Build Status](https://travis-ci.org/SleuthKid/misp-hub.svg?branch=master)](https://travis-ci.org/SleuthKid/misp-hub)
+# MISP Hub [![Build Status](https://travis-ci.org/rhaist/misp-hub.svg?branch=master)](https://travis-ci.org/rhaist/misp-hub)
 
 **Work In Progress - This is nowhere near production grade. Do not use for anything important yet.**
 
