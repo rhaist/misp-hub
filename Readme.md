@@ -31,6 +31,6 @@ permission model (https://django-guardian.readthedocs.io/en/stable/)
 
 This software is licensed under [BSD-3 clause](https://opensource.org/licenses/BSD-3-Clause)
 
-Copyright (C) 2017, Robert Haist
+Copyright (C) 2017-2018, Robert Haist
 
 For more information, [the list of authors and contributors](AUTHORS) is available.
